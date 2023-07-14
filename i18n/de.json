@@ -1,0 +1,44 @@
+{
+  "about":{
+    "title": "TLDR Nachrichten",
+    "author": "Autor",
+    "code": "Quellcode",
+    "license": "Lizenz",
+    "bug": "Fehler melden",
+    "version": "Version",
+    "close": "Ok"
+  },
+  "backup": {
+    "title": "Sicherung"
+  },
+  "common": {
+    "datetime": {
+      "locale": "de-DE",
+      "format": {
+        "date": "dd.MM.yyyy",
+        "time": "HH:mm",
+        "datetime": "dd.MM.yyyy HH:mm"
+      }
+    }
+  },
+  "home": {
+    "title": "Übersicht"
+  },
+  "meta": {
+    "language": {
+      "code": "Deutsch"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "crawler": {
+      "cors-proxy": "CORS Proxy"
+    },
+    "theme": {
+      "dark": "Nachtmodus"
+    },
+    "language": {
+      "title": "Sprache"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "about":{
+    "title": "TLDR News",
+    "author": "Author",
+    "code": "Sourcecode",
+    "license": "License",
+    "bug": "Bug report",
+    "version": "Version",
+    "close": "Ok"
+  },
+  "backup": {
+    "title": "Backup"
+  },
+  "common": {
+    "datetime": {
+      "locale": "en-US",
+      "format": {
+        "date": "yyyy-MM-dd",
+        "time": "HH:mm",
+        "datetime": "yyyy-MM-dd HH:mm"
+      }
+    }
+  },
+  "home": {
+    "title": "Overview"
+  },
+  "meta": {
+    "language": {
+      "code": "English"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "crawler": {
+      "cors-proxy": "CORS Proxy"
+    },
+    "theme": {
+      "dark": "Darkmode"
+    },
+    "language": {
+      "title": "Language"
+    }
+  }
+}
