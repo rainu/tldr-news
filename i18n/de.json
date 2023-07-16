@@ -8,9 +8,6 @@
     "version": "Version",
     "close": "Ok"
   },
-  "backup": {
-    "title": "Sicherung"
-  },
   "common": {
     "datetime": {
       "locale": "de-DE",
@@ -20,6 +17,9 @@
         "datetime": "dd.MM.yyyy HH:mm"
       }
     }
+  },
+  "heise": {
+    "title": "Heise"
   },
   "home": {
     "title": "Übersicht"
@@ -40,5 +40,8 @@
     "language": {
       "title": "Sprache"
     }
+  },
+  "tagesschau": {
+    "title": "Tagesschau"
   }
 }

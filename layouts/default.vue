@@ -11,7 +11,10 @@
             @click="goto(item.to)"
         >
           <template v-slot:prepend>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon v-if="item.icon">{{ item.icon }}</v-icon>
+            <v-icon v-if="item.favIcon">
+              <v-img :src="item.favIcon" heigt="24" width="24" ></v-img>
+            </v-icon>
           </template>
 
           <v-list-item-title v-text="$t(item.title)" />
@@ -21,6 +24,11 @@
 
     <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+
+      <img v-if="currentFavIcon" :src="currentFavIcon" width="24" :alt="$t(currentTitle)" />
+      <strong class="pl-2">
+        {{ $t(currentTitle) }}
+      </strong>
 
       <v-spacer />
 
@@ -59,9 +67,14 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-backup-restore',
-          title: 'backup.title',
-          to: '/backup'
+          favIcon: 'https://tagesschau.de/resources/assets/image/favicon/favicon.svg',
+          title: 'tagesschau.title',
+          to: '/tagesschau'
+        },
+        {
+          favIcon: 'https://www.heise.de/icons/ho/favicon/favicon-32x32.png',
+          title: 'heise.title',
+          to: '/heise'
         }
       ],
       rightDrawer: false,
@@ -75,6 +88,12 @@ export default {
   computed: {
     currentRoute(){
       return this.$route.path
+    },
+    currentTitle(){
+      return this.items.find(i => i.to === this.$route.path).title
+    },
+    currentFavIcon(){
+      return this.items.find(i => i.to === this.$route.path).favIcon
     }
   }
 }

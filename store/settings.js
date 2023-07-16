@@ -4,7 +4,6 @@ import { defineStore } from 'pinia'
 import {useNuxtApp} from "#app";
 
 let vuetifyInstance = null
-
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
     cors: {
