@@ -16,6 +16,18 @@ export default defineNuxtConfig({
 
   ssr: false, // Disable Server Side rendering (this is an SPA only!)
   devtools: {enabled: true},
+
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: 'favicon.png'
+        }
+      ]
+    }
+  },
   css: [
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css'

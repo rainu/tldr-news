@@ -16,7 +16,11 @@
         "time": "HH:mm",
         "datetime": "dd.MM.yyyy HH:mm"
       }
-    }
+    },
+    "estimation": {
+      "read": "geschätzte Lesedauer:"
+    },
+    "wordcount": "Wörter im Artikel:"
   },
   "heise": {
     "title": "Heise"
@@ -39,6 +43,17 @@
     },
     "language": {
       "title": "Sprache"
+    },
+    "openai": {
+      "title": "OpenAI",
+      "token": "API Schlüssel",
+      "model": "Model",
+      "temperature":  {
+        "label": "Temperatur",
+        "min": "Präzise",
+        "max": "Kreativ"
+      },
+      "prompt": "Systemaufforderung"
     }
   },
   "tagesschau": {

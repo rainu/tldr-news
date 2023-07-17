@@ -13,6 +13,16 @@ export const useSettingsStore = defineStore('settings', {
     theme: {
       dark: true,
     },
+    openai: {
+      token: '',
+      prompt: `I want you to only reply in JSON form! The content of this JSON is the following: 
+  * "points": the most important statements which reflects the summary of the article 
+  * "topics": at most two biggest topics as single word in the whole article
+  * "conclusion": a short conclusion of the whole article
+Do answer only in german!`,
+      model: 'gpt-3.5-turbo',
+      temperature: 0.5,
+    }
   }),
   actions: {
     applyDarkTheme(dark){

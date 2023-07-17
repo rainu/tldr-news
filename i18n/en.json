@@ -16,7 +16,11 @@
         "time": "HH:mm",
         "datetime": "yyyy-MM-dd HH:mm"
       }
-    }
+    },
+    "estimation": {
+      "read": "estimated read duration:"
+    },
+    "wordcount": "words in this article:"
   },
   "home": {
     "title": "Overview"
@@ -36,6 +40,16 @@
     },
     "language": {
       "title": "Language"
+    },
+    "openai": {
+      "token": "API-Key",
+      "model": "Model",
+      "temperature":  {
+        "label": "Temperature",
+        "min": "Precise",
+        "max": "Creative"
+      },
+      "prompt": "Systemprompt"
     }
   }
 }

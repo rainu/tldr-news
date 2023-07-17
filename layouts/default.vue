@@ -44,7 +44,7 @@
       <NuxtPage />
     </v-main>
 
-    <v-navigation-drawer v-model="rightDrawer" location="right" temporary fixed>
+    <v-navigation-drawer v-model="rightDrawer" location="right" temporary fixed width="80%">
       <Settings />
     </v-navigation-drawer>
   </v-app>
