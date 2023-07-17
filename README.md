@@ -1,63 +1,36 @@
-# Nuxt 3 Minimal Starter
+# tldr-new
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+TooLong;DidntRead News - A tool for lazy readers. Crawl news ticker and provide a summary generated 
+by openAI.
 
-## Setup
+## How to install application
 
-Make sure to install the dependencies:
+### Desktop
+1. Open Chrome
+1. Navigate to [TLDR-News](https://rainu.github.io/tldr-news/)
+1. Tap Add to home screen
 
-```bash
-# npm
-npm install
+### Android
+1. Open Chrome
+1. Navigate to [TLDR-News](https://rainu.github.io/tldr-news/)
+1. At the top right, click More (three dots)
+1. Click "Install TLDR-News ..."
 
-# pnpm
-pnpm install
+## Quickstart for developer
 
-# yarn
-yarn install
+``` bash
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# generate static project for production
+$ npm run generate
 ```
 
-## Development Server
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxt.com).
 
-Start the development server on `http://localhost:3000`:
+## License
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+MIT, see [LICENSE](LICENSE).
