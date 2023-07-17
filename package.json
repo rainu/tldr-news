@@ -1,5 +1,6 @@
 {
   "name": "tldr-news",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "COMMIT_HASH=$(git rev-parse HEAD) nuxt dev",
