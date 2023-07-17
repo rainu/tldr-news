@@ -1,4 +1,5 @@
 <template>
+  <VitePwaManifest />
   <v-app>
 
     <v-navigation-drawer v-model="drawer" fixed app>
@@ -41,6 +42,7 @@
     </v-app-bar>
 
     <v-main>
+      <NuxtLoadingIndicator />
       <NuxtPage />
     </v-main>
 

@@ -36,7 +36,44 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
   ],
-  pwa: {},
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'TLDR - News',
+      short_name: 'TLDRNews',
+      theme_color: '#212121',
+      icons: [
+        {
+          src: 'favicon-64x64.png',
+          sizes: '64x64',
+          type: 'image/png',
+        },
+        {
+          src: 'favicon-128x128.png',
+          sizes: '128x128',
+          type: 'image/png',
+        },
+        {
+          src: 'favicon.png',
+          sizes: '256x256',
+          type: 'image/png',
+        },
+      ],
+    },
+    workbox: {
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    },
+    client: {
+      installPrompt: true,
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      navigateFallbackAllowlist: [/^\/$/],
+      type: 'module',
+    },
+},
   i18n: {
     vueI18n: './i18n/config.ts'
   }
