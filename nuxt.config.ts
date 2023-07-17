@@ -1,19 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config#
 
-// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-  router: {
-    base: '/tldr-news/'
-  }
-} : {
-  router: {
-    base: '/'
-  }
-}
-
 export default defineNuxtConfig({
-  ...routerBase,
-
   ssr: false, // Disable Server Side rendering (this is an SPA only!)
   devtools: {enabled: true},
 

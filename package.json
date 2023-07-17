@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "COMMIT_HASH=$(git rev-parse HEAD) nuxt dev",
-    "generate": "DEPLOY_ENV=GH_PAGES COMMIT_HASH=$(git rev-parse HEAD) nuxt generate",
+    "generate": "NUXT_APP_BASE_URL=/tldr-news/ COMMIT_HASH=$(git rev-parse HEAD) nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
