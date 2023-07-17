@@ -1,0 +1,1 @@
+import{O as i,P as a,Q as n}from"./entry.6d76d18c.js";async function s(){const t=await i(()=>import("./config.4a60cb9a.js"),["./config.4a60cb9a.js","./index.ccbed6fa.js"],import.meta.url).then(o=>o.default||o);return a(t)?await t():n(t)?t:{}}export{s as default};
