@@ -28,6 +28,7 @@ jobs:
         env:
           TARGET_BRANCH: main
         run: |
+          cat docs/200.html
           git add ${GITHUB_WORKSPACE}/docs
           git commit -m "build version $(git describe --tags)"
           git push target-repo HEAD:${TARGET_BRANCH}
