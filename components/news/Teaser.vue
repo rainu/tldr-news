@@ -137,5 +137,6 @@ export default {
 <style>
 .clickable {
   cursor:pointer;
+  user-select: none;
 }
 </style>
