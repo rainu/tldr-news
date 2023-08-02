@@ -22,6 +22,12 @@
     },
     "wordcount": "Wörter im Artikel:"
   },
+  "faz": {
+    "title": "Frankfurter Allgemeine"
+  },
+  "faz-dpa": {
+    "title": "dpa - Frankfurter Allgemeine"
+  },
   "heise": {
     "title": "Heise"
   },

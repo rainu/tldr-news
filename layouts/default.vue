@@ -14,7 +14,8 @@
           <template v-slot:prepend>
             <v-icon v-if="item.icon">{{ item.icon }}</v-icon>
             <v-icon v-if="item.favIcon">
-              <v-img :src="item.favIcon" heigt="24" width="24" ></v-img>
+              <v-img v-if="typeof item.favIcon === 'function'" :src="item.favIcon()" heigt="24" width="24" ></v-img>
+              <v-img v-else :src="item.favIcon" heigt="24" width="24" ></v-img>
             </v-icon>
           </template>
 
@@ -56,6 +57,7 @@
 
 import Info from "@/components/Info";
 import Settings from "@/components/settings";
+import {useTheme} from "vuetify";
 
 export default {
   components: {Info, Settings},
@@ -77,6 +79,21 @@ export default {
           favIcon: 'https://www.heise.de/icons/ho/favicon/favicon-32x32.png',
           title: 'heise.title',
           to: '/heise'
+        },
+        {
+          favIcon(){
+            if(useTheme().current.value.dark) {
+              return 'https://m.faz.net/;lm=1689594711;pass/fit/project/files/images/logos/f-white.svg'
+            }
+            return 'https://m.faz.net/;lm=1689594711;pass/fit/project/files/images/logos/f-black.svg'
+          },
+          title: 'faz.title',
+          to: '/faz'
+        },
+        {
+          favIcon: 'https://dpa.com/icon-512x512.png',
+          title: 'faz-dpa.title',
+          to: '/faz-dpa'
         }
       ],
       rightDrawer: false,
@@ -95,7 +112,11 @@ export default {
       return this.items.find(i => i.to === this.$route.path).title
     },
     currentFavIcon(){
-      return this.items.find(i => i.to === this.$route.path).favIcon
+      let item = this.items.find(i => i.to === this.$route.path)
+      if(typeof item.favIcon === 'function') {
+        return item.favIcon()
+      }
+      return item.favIcon
     }
   }
 }
