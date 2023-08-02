@@ -61,5 +61,13 @@
   },
   "tagesschau": {
     "title": "Tagesschau"
+  },
+  "validation": {
+    "openai": {
+      "missing-token": {
+        "title": "API Schlüssel",
+        "text": "Es ist kein OpenAI-API Schlüssel hinterlegt."
+      }
+    }
   }
 }

@@ -54,5 +54,13 @@
       },
       "prompt": "Systemprompt"
     }
+  },
+  "validation": {
+    "openai": {
+      "missing-token": {
+        "title": "API-Key",
+        "text": "There is no OpenAI-API key stored."
+      }
+    }
   }
 }
