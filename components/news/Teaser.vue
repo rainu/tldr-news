@@ -1,8 +1,8 @@
 <template>
   <v-card dense>
     <template v-slot:title>
-      <v-toolbar class="clickable" @click="read">
-        <v-toolbar-title>
+      <v-toolbar>
+        <v-toolbar-title class="clickable" @click="read">
           <Vue3Marquee :duration="marqueeDuration">
             <span class="pr-2">{{ title }}</span>
           </Vue3Marquee>
