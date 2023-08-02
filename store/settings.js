@@ -13,6 +13,7 @@ export const useSettingsStore = defineStore('settings', {
     theme: {
       dark: true,
     },
+    marqueeSpeed: 50,
     openai: {
       token: '',
       prompt: `I want you to only reply in JSON form! The content of this JSON is the following: 

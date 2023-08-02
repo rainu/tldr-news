@@ -3,7 +3,7 @@
     <template v-slot:title>
       <v-toolbar class="clickable" @click="read">
         <v-toolbar-title>
-          <Vue3Marquee>
+          <Vue3Marquee :duration="marqueeDuration">
             <span class="pr-2">{{ title }}</span>
           </Vue3Marquee>
         </v-toolbar-title>
@@ -59,6 +59,8 @@
 
 <script>
 import {format} from "date-fns";
+import {useSettingsStore} from '~/store/settings'
+import { mapState } from 'pinia';
 import {openaiClient} from "~/services/openai";
 import * as dateFns from 'date-fns'
 
@@ -90,6 +92,13 @@ export default {
     }
   },
   computed: {
+    ...mapState(useSettingsStore, ['marqueeSpeed']),
+    marqueeDuration() {
+      if(this.marqueeSpeed === 0) return 0
+      if(this.marqueeSpeed === 100) return 0.5
+
+      return 30 * (100 - this.marqueeSpeed) / 100
+    },
     wordCount(){
       return this.content.content.match(/\b\w+\b/g).length
     },

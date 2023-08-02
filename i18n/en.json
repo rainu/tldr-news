@@ -35,6 +35,9 @@
     "crawler": {
       "cors-proxy": "CORS Proxy"
     },
+    "marquee": {
+      "speed": "Marquee speed"
+    },
     "theme": {
       "dark": "Darkmode"
     },

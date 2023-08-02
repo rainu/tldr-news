@@ -6,7 +6,7 @@
           <v-card>
             <v-card-title>{{ $t('settings.title') }}</v-card-title>
             <v-card-text>
-              <SettingsTheme />
+              <SettingsGeneral />
               <SettingsLanguage />
               <SettingsCrawler />
             </v-card-text>
@@ -27,13 +27,13 @@
 
 <script>
 
-import SettingsTheme from "~/components/settings/Theme";
+import SettingsGeneral from "~/components/settings/General";
 import SettingsLanguage from "~/components/settings/Language";
 import SettingsCrawler from "~/components/settings/Crawler";
 import SettingsOpenAI from "~/components/settings/OpenAI.vue";
 export default {
   name: "Settings",
-  components: {SettingsCrawler, SettingsLanguage, SettingsTheme, SettingsOpenAI},
+  components: {SettingsCrawler, SettingsLanguage, SettingsGeneral, SettingsOpenAI},
   data(){
     return {
       panel: 0

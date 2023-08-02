@@ -44,6 +44,9 @@
     "language": {
       "title": "Sprache"
     },
+    "marquee": {
+      "speed": "Lauftext Geschwindigkeit"
+    },
     "openai": {
       "title": "OpenAI",
       "token": "API Schlüssel",
