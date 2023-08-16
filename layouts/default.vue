@@ -101,6 +101,16 @@ export default {
           to: '/faz-dpa'
         },
         {
+          favIcon: 'https://static.zeit.de/p/zeit.web/icons/favicon.svg',
+          title: 'zeit.title',
+          to: '/zeit'
+        },
+        {
+          favIcon: 'https://dpa.com/icon-512x512.png',
+          title: 'zeit-dpa.title',
+          to: '/zeit-dpa'
+        },
+        {
           favIcon: 'https://www.radiobonn.de/assets/images/senderlogos/radio_brs_webradio.png',
           title: 'radiobonn.title',
           to: '/radio-bonn'

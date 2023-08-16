@@ -89,5 +89,11 @@
         "text": "Es ist kein OpenAI-API Schlüssel hinterlegt."
       }
     }
+  },
+  "zeit": {
+    "title": "Zeit Online"
+  },
+  "zeit-dpa": {
+    "title": "dpa - Zeit Online"
   }
 }
