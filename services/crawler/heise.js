@@ -5,6 +5,7 @@ export const createCrawlerHeise = (requestFn = proxyFetch) => {
   return {
     crawl(){
       return requestFn(`https://www.heise.de/newsticker/`)
+        .then(response => response.text())
         .then(content => new DOMParser().parseFromString(content, 'text/html'))
         .then(doc => {
           let result = Array.from(doc.querySelectorAll('section.archive__day article.a-article-teaser'))
@@ -21,6 +22,7 @@ export const createCrawlerHeise = (requestFn = proxyFetch) => {
 
     read(url) {
       return requestFn(url)
+      .then(response => response.text())
       .then(content => new DOMParser().parseFromString(content, 'text/html'))
       .then(doc => {
         let imgSrc = 'https://www.heise.de' + doc.querySelector('a-img').getAttribute('src')

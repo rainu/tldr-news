@@ -4,6 +4,7 @@ export const createCrawlerFaz = (requestFn = proxyFetch) => {
 
   const crawlPage = (page) => {
     return requestFn(`https://www.faz.net/faz-live-p${page}`)
+      .then(response => response.text())
       .then(content => new DOMParser().parseFromString(content, 'text/html'))
       .then(doc => {
         let result = Array.from(doc.querySelectorAll('div.ticker-news-text'))
