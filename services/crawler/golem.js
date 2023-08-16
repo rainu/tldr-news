@@ -7,6 +7,7 @@ export const createCrawlerGolem = (requestFn = proxyFetch) => {
     crawl(){
       return requestFn(`https://www.golem.de/ticker/`, {
         headers: {
+          "User-Agent": "curl/8.2.1",
           "Cookie": "golem_consent20=simple|220101" //give consent
         }
       })
@@ -28,6 +29,7 @@ export const createCrawlerGolem = (requestFn = proxyFetch) => {
     read(url) {
       return requestFn(url, {
         headers: {
+          "User-Agent": "curl/8.2.1",
           "Cookie": "golem_consent20=simple|220101" //give consent
         }
       })
