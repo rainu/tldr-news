@@ -33,7 +33,13 @@
   "settings": {
     "title": "Settings",
     "crawler": {
-      "cors-proxy": "CORS Proxy"
+      "cors": {
+        "proxy": "CORS Proxy"
+      },
+      "r-ray": {
+        "username": "Username",
+        "password": "Password"
+      }
     },
     "marquee": {
       "speed": "Marquee speed"

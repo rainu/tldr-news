@@ -9,6 +9,11 @@ export const useSettingsStore = defineStore('settings', {
     cors: {
       proxy: 'https://cors-anywhere.herokuapp.com/'
     },
+    rray: {
+      url: null,
+      username: null,
+      password: null
+    },
     locale: i18n.defaultLocale,
     theme: {
       dark: true,

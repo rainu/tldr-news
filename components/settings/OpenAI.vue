@@ -1,5 +1,5 @@
 <template>
-  <v-text-field v-model="token" :label="$t('settings.openai.token')"></v-text-field>
+  <GeneralSecret v-model="token" :label="$t('settings.openai.token')"></GeneralSecret>
   <v-textarea v-model="prompt" :label="$t('settings.openai.prompt')" />
   <v-select v-model="model" :label="$t('settings.openai.model')" :items="availableModels" />
 

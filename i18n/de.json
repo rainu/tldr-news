@@ -42,7 +42,15 @@
   "settings": {
     "title": "Einstellungen",
     "crawler": {
-      "cors-proxy": "CORS Proxy"
+      "cors": {
+        "proxy": "CORS Proxy"
+      },
+      "r-ray": {
+        "proxy": "R-Ray Proxy",
+        "url": "URL",
+        "username": "Benutzername",
+        "password": "Passwort"
+      }
     },
     "theme": {
       "dark": "Nachtmodus"

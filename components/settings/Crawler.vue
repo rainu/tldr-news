@@ -1,10 +1,30 @@
 <template>
+  <v-radio-group inline v-model="type">
+    <v-radio :label="$t('settings.crawler.cors.proxy')" value="cors"></v-radio>
+    <v-radio :label="$t('settings.crawler.r-ray.proxy')" value="r-ray"></v-radio>
+  </v-radio-group>
   <v-combobox
-    v-model="value"
+    v-if="type === 'cors'"
+    v-model="corsValue.url"
     :label="$t('settings.crawler.cors-proxy')"
-    :items="predefinedItems"
-    @change="onChange">
+    :items="predefinedCorsItems"
+    @change="onCorsChange">
   </v-combobox>
+  <template v-if="type === 'r-ray'">
+    <v-row dense>
+      <v-col cols="12">
+        <v-text-field v-model="rrayValue.url" :label="$t('settings.crawler.r-ray.url')" @change="onRrayChange" />
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="6">
+        <v-text-field v-model="rrayValue.username" :label="$t('settings.crawler.r-ray.username')" @change="onRrayChange" />
+      </v-col>
+      <v-col cols="6">
+        <GeneralSecret v-model="rrayValue.password" :label="$t('settings.crawler.r-ray.password')" @change="onRrayChange" />
+      </v-col>
+    </v-row>
+  </template>
 </template>
 
 <script>
@@ -15,26 +35,45 @@ export default {
   name: "SettingsCrawler",
   data(){
     return {
-      value: null,
-      predefinedItems: [
+      corsValue: {
+        url: null
+      },
+      rrayValue: {
+        url: null,
+        username: null,
+        password: null,
+      },
+      type: null,
+      predefinedCorsItems: [
         'https://cors-anywhere.herokuapp.com/',
       ]
     }
   },
   computed: {
-    ...mapWritableState(useSettingsStore, ['cors'])
+    ...mapWritableState(useSettingsStore, ['cors', 'rray'])
   },
   methods: {
-    onChange(){
-      this.cors.proxy = this.value
+    onCorsChange(){
+      this.cors.proxy = this.corsValue.url
+    },
+    onRrayChange(){
+      this.rray.url = this.rrayValue.url
+      this.rray.username = this.rrayValue.username
+      this.rray.password = this.rrayValue.password
     }
   },
   mounted() {
-    this.value = this.cors.proxy
+    this.type = !!this.rray && !!this.rray.url ? 'r-ray' : 'cors'
 
-    let i = this.predefinedItems.findIndex(i => i === this.value)
+    this.rrayValue.url = this.rray.url
+    this.rrayValue.username = this.rray.username
+    this.rrayValue.password = this.rray.password
+
+    this.corsValue.url = this.cors.proxy
+
+    let i = this.predefinedCorsItems.findIndex(i => i === this.corsValue.url)
     if(i < 0) {
-      this.predefinedItems.push(this.value)
+      this.predefinedCorsItems.push(this.corsValue.url)
     }
   }
 }

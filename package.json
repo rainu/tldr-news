@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
+    "@rainu/r-ray-client": "^0.0.1",
     "date-fns": "^2.30.0",
     "openai": "^3.3.0",
     "sass": "^1.63.6",
