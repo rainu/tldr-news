@@ -60,6 +60,7 @@ export const createCrawlerFaz = (requestFn = proxyFetch) => {
 
     read(url) {
       return requestFn(url)
+        .then(response => response.text())
         .then(content => new DOMParser().parseFromString(content, 'text/html'))
         .then(doc => {
           return {
