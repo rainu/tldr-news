@@ -81,6 +81,11 @@ export default {
           to: '/heise'
         },
         {
+          favIcon: 'https://www.golem.de/staticrl/images/logo-auge-b24.png',
+          title: 'golem.title',
+          to: '/golem'
+        },
+        {
           favIcon(){
             if(useTheme().current.value.dark) {
               return 'https://m.faz.net/;lm=1689594711;pass/fit/project/files/images/logos/f-white.svg'
