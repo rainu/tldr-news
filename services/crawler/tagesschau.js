@@ -3,7 +3,7 @@ export const createCrawlerTagesschau = (requestFn = $fetch) => {
 
   const crawlDate = (date) => {
     return requestFn(`https://www.tagesschau.de/archiv/allemeldungen?datum=${format(date, 'yyyy-MM-dd')}`)
-      .then(response => response.text())
+      .then(response => typeof response === 'string' ? response : response.text())
       .then(content => new DOMParser().parseFromString(content, 'text/html'))
       .then(doc => {
         let result = Array.from(doc.querySelectorAll('li.teaser-mikro')).map(e => ({
@@ -43,7 +43,7 @@ export const createCrawlerTagesschau = (requestFn = $fetch) => {
 
     read(url) {
       return requestFn(url)
-        .then(response => response.text())
+        .then(response => typeof response === 'string' ? response : response.text())
         .then(content => new DOMParser().parseFromString(content, 'text/html'))
         .then(doc => {
           return {
