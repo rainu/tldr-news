@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: process.env.npm_package_name,
-      version: process.env.npm_package_version,
+      version: process.env.GIT_REF_NAME || process.env.npm_package_version,
       builtDate: new Date(),
       revision: process.env.COMMIT_HASH || 'development',
     }
