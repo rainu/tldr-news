@@ -39,6 +39,9 @@
       "code": "Deutsch"
     }
   },
+  "radiobonn": {
+    "title": "Radio Bonn/Rhein-Sieg"
+  },
   "settings": {
     "title": "Einstellungen",
     "crawler": {

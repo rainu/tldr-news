@@ -94,6 +94,11 @@ export default {
           favIcon: 'https://dpa.com/icon-512x512.png',
           title: 'faz-dpa.title',
           to: '/faz-dpa'
+        },
+        {
+          favIcon: 'https://www.radiobonn.de/assets/images/senderlogos/radio_brs_webradio.png',
+          title: 'radiobonn.title',
+          to: '/radio-bonn'
         }
       ],
       rightDrawer: false,
