@@ -1,5 +1,5 @@
 import {parse} from 'date-fns'
-import {proxyFetch} from "~/services/crawler/common";
+import {proxyFetch} from "~/services/news/common";
 export const createCrawlerFaz = (requestFn = proxyFetch) => {
 
   const crawlPage = (page) => {

@@ -57,6 +57,11 @@ export default {
   mounted() {
     this.crawler.crawl()
     .then(entries => {
+      if(entries.length === 0) {
+        this.loaded = true
+        return
+      }
+
       let curDate = new Date().getDate()
 
       //split into date chunks

@@ -14,8 +14,7 @@
           <template v-slot:prepend>
             <v-icon v-if="item.icon">{{ item.icon }}</v-icon>
             <v-icon v-if="item.favIcon">
-              <v-img v-if="typeof item.favIcon === 'function'" :src="item.favIcon()" heigt="24" width="24" ></v-img>
-              <v-img v-else :src="item.favIcon" heigt="24" width="24" ></v-img>
+              <v-img :src="item.favIcon" heigt="24" width="24" ></v-img>
             </v-icon>
           </template>
 
@@ -57,65 +56,30 @@
 
 import Info from "@/components/Info";
 import Settings from "@/components/settings";
-import {useTheme} from "vuetify";
+import news from '~/services/news'
 
 export default {
   components: {Info, Settings},
   data () {
+    const items = [
+      {
+        icon: 'mdi-home',
+        title: 'home.title',
+        to: '/'
+      }
+    ]
+
+    for (const sourceId in news.sources) {
+      items.push({
+        favIcon: news.sources[sourceId].favIcon(),
+        title: `${sourceId}.title`,
+        to: `/news/${sourceId}`
+      })
+    }
+
     return {
       drawer: false,
-      items: [
-        {
-          icon: 'mdi-home',
-          title: 'home.title',
-          to: '/'
-        },
-        {
-          favIcon: 'https://tagesschau.de/resources/assets/image/favicon/favicon.svg',
-          title: 'tagesschau.title',
-          to: '/tagesschau'
-        },
-        {
-          favIcon: 'https://www.heise.de/icons/ho/favicon/favicon-32x32.png',
-          title: 'heise.title',
-          to: '/heise'
-        },
-        {
-          favIcon: 'https://www.golem.de/staticrl/images/logo-auge-b24.png',
-          title: 'golem.title',
-          to: '/golem'
-        },
-        {
-          favIcon(){
-            if(useTheme().current.value.dark) {
-              return 'https://m.faz.net/;lm=1689594711;pass/fit/project/files/images/logos/f-white.svg'
-            }
-            return 'https://m.faz.net/;lm=1689594711;pass/fit/project/files/images/logos/f-black.svg'
-          },
-          title: 'faz.title',
-          to: '/faz'
-        },
-        {
-          favIcon: 'https://dpa.com/icon-512x512.png',
-          title: 'faz-dpa.title',
-          to: '/faz-dpa'
-        },
-        {
-          favIcon: 'https://static.zeit.de/p/zeit.web/icons/favicon.svg',
-          title: 'zeit.title',
-          to: '/zeit'
-        },
-        {
-          favIcon: 'https://dpa.com/icon-512x512.png',
-          title: 'zeit-dpa.title',
-          to: '/zeit-dpa'
-        },
-        {
-          favIcon: 'https://www.radiobonn.de/assets/images/senderlogos/radio_brs_webradio.png',
-          title: 'radiobonn.title',
-          to: '/radio-bonn'
-        }
-      ],
+      items,
       rightDrawer: false,
     }
   },
@@ -132,11 +96,7 @@ export default {
       return this.items.find(i => i.to === this.$route.path).title
     },
     currentFavIcon(){
-      let item = this.items.find(i => i.to === this.$route.path)
-      if(typeof item.favIcon === 'function') {
-        return item.favIcon()
-      }
-      return item.favIcon
+      return this.items.find(i => i.to === this.$route.path).favIcon
     }
   }
 }

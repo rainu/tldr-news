@@ -18,7 +18,7 @@ export default {
   },
   mounted() {
     if(this.openai.token) {
-      this.$router.push('/tagesschau');
+      this.$router.push('/news/tagesschau');
     }
   }
 }
