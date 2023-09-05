@@ -2,7 +2,7 @@
   <VitePwaManifest />
   <v-app>
 
-    <v-navigation-drawer v-model="drawer" fixed app width="512">
+    <v-navigation-drawer v-model="drawer" fixed app :width="menuWidth">
       <v-list>
         <v-list-item
             v-for="(item, i) in commonListItems"
@@ -140,6 +140,7 @@ export default {
     }]
 
     return {
+      menuWidth: window.innerWidth * 0.75,
       drawer: false,
       commonListItems,
       newsListItems,
@@ -158,7 +159,7 @@ export default {
       navigateTo({
         path: `/books/ct/login`
       })
-    }
+    },
   },
   computed: {
     ...mapState(useSessionsStore, ['isLoggedInHeise']),
@@ -201,6 +202,6 @@ export default {
   },
   mounted() {
     this.setVuetify(useTheme())
-  }
+  },
 }
 </script>
