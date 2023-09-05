@@ -110,6 +110,8 @@ import Settings from "@/components/settings";
 import news from '~/services/news'
 import {mapActions, mapState} from "pinia";
 import {useSessionsStore} from "~/store/sessions";
+import {useTheme} from "vuetify";
+import {useSettingsStore} from "~/store/settings";
 
 export default {
   components: {Info, Settings},
@@ -146,6 +148,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(useSettingsStore, ['setVuetify']),
     ...mapActions(useSessionsStore, ['heiseLogout']),
     goto(target){
       this.$router.push(target)
@@ -195,6 +198,9 @@ export default {
     showHeiseLogout(){
       return this.$route.path.startsWith('/books/ct') && this.isLoggedInHeise
     }
+  },
+  mounted() {
+    this.setVuetify(useTheme())
   }
 }
 </script>

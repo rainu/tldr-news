@@ -1,5 +1,4 @@
 import i18n from '../i18n'
-import { useTheme } from 'vuetify'
 import { defineStore } from 'pinia'
 import {useNuxtApp} from "#app";
 
@@ -36,6 +35,10 @@ Do answer only in german!`,
     }
   },
   actions: {
+    setVuetify(vuetify) {
+      vuetifyInstance = vuetify
+      vuetifyInstance.global.name.value = this.theme.dark ? 'dark' : 'light'
+    },
     applyDarkTheme(dark){
       if(vuetifyInstance) {
         vuetifyInstance.global.name.value = dark ? 'dark' : 'light'
@@ -55,9 +58,6 @@ Do answer only in german!`,
     storage: persistedState.localStorage,
     afterRestore(ctx) {
       useNuxtApp().$i18n.setLocale(ctx.store.$state.locale)
-      vuetifyInstance = useTheme()
-
-      vuetifyInstance.global.name.value = ctx.store.$state.theme.dark ? 'dark' : 'light'
     }
   },
 })
