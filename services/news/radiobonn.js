@@ -1,4 +1,4 @@
-import {proxyFetch} from "~/services/news/common";
+import {proxyFetch} from "~/services/common";
 
 export const createCrawlerRadioBonn = (requestFn = proxyFetch) => {
 

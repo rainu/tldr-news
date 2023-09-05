@@ -9,6 +9,7 @@
     "close": "Ok"
   },
   "common": {
+    "books": "Bücher & Magazine",
     "datetime": {
       "locale": "de-DE",
       "format": {
@@ -17,9 +18,16 @@
         "datetime": "dd.MM.yyyy HH:mm"
       }
     },
+    "error": {
+      "r-ray-mandatory": {
+        "title": "R-Ray ist nötig",
+        "description": "Für dieses Feature ist ein R-Ray Proxy notwendig. Nachdem ein R-Ray Proxy konfiguriert wurde, ist dieses Feature verfügbar!"
+      }
+    },
     "estimation": {
       "read": "geschätzte Lesedauer:"
     },
+    "news": "Nachrichten",
     "wordcount": "Wörter im Artikel:"
   },
   "faz": {
@@ -32,7 +40,17 @@
     "title": "Golem"
   },
   "heise": {
-    "title": "Heise"
+    "title": "Heise",
+    "login": {
+      "title": "heise online - Anmeldung",
+      "username": "E-Mail-Adresse",
+      "password": "Passwort",
+      "action": "Anmelden"
+    },
+    "logout": "heise online - Abmelden",
+    "ct": {
+      "title": "c't"
+    }
   },
   "home": {
     "title": "Übersicht"

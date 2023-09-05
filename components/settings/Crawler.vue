@@ -55,11 +55,17 @@ export default {
   methods: {
     onCorsChange(){
       this.cors.proxy = this.corsValue.url
+
+      this.rray.url = null
+      this.rrayValue.url = null
     },
     onRrayChange(){
       this.rray.url = this.rrayValue.url
       this.rray.username = this.rrayValue.username
       this.rray.password = this.rrayValue.password
+
+      this.cors.proxy = null
+      this.corsValue.url = null
     }
   },
   mounted() {

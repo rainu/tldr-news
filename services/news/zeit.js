@@ -1,4 +1,4 @@
-import {proxyFetch} from "./common";
+import {proxyFetch} from "../common";
 
 const baseCrawlerZeit = (requestFn = proxyFetch, teaserFilter) => {
 

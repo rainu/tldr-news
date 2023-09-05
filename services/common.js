@@ -3,6 +3,15 @@ import {client} from '@rainu/r-ray-client/src'
 
 let clientInstance = null
 
+export const rrayClient = () => {
+  if(!clientInstance) {
+    const rray = useSettingsStore().$state.rray
+
+    clientInstance = client(rray.url, rray.username, rray.password)
+  }
+  return clientInstance
+}
+
 export const proxyFetch = (url, opts) => {
   const rray = useSettingsStore().$state.rray
   const cors = useSettingsStore().$state.cors

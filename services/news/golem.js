@@ -1,5 +1,5 @@
 import {parse} from 'date-fns'
-import {proxyFetch} from "./common";
+import {proxyFetch} from "../common";
 
 export const createCrawlerGolem = (requestFn = proxyFetch) => {
 

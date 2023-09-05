@@ -30,6 +30,11 @@ Do answer only in german!`,
       temperature: 0.5,
     }
   }),
+  getters: {
+    isRrayInUse: (state) => {
+      return !!state.rray.url
+    }
+  },
   actions: {
     applyDarkTheme(dark){
       if(vuetifyInstance) {

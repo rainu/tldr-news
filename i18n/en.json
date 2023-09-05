@@ -9,6 +9,7 @@
     "close": "Ok"
   },
   "common": {
+    "books": "Books & Magazines",
     "datetime": {
       "locale": "en-US",
       "format": {
@@ -17,10 +18,26 @@
         "datetime": "yyyy-MM-dd HH:mm"
       }
     },
+    "error": {
+      "r-ray-mandatory": {
+        "title": "R-Ray is mandatory",
+        "description": "To use this feature a R-Ray Proxy is mandatory. After a R-Ray Proxy is configured, this feature is available!"
+      }
+    },
     "estimation": {
       "read": "estimated read duration:"
     },
+    "news": "News",
     "wordcount": "words in this article:"
+  },
+  "heise": {
+    "login": {
+      "title": "heise online - Login",
+      "username": "E-Mail-Address",
+      "password": "Password",
+      "action": "Login"
+    },
+    "logout": "heise online - Logout"
   },
   "home": {
     "title": "Overview"
