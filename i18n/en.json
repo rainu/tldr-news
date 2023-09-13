@@ -37,7 +37,7 @@
       "password": "Password",
       "action": "Login"
     },
-    "logout": "heise online - Logout"
+    "logout": "Logout"
   },
   "home": {
     "title": "Overview"
