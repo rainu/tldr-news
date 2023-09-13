@@ -140,7 +140,7 @@ export default {
     }]
 
     return {
-      menuWidth: window.innerWidth * 0.75,
+      menuWidth: window.innerWidth > 1024 ? 256 : window.innerWidth * 0.75,
       drawer: false,
       commonListItems,
       newsListItems,
