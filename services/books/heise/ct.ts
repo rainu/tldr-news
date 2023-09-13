@@ -26,8 +26,9 @@ export const loginHeise = async (username: string, password: string) => {
 export const createCrawlerHeiseCt = (sessionCookies: string) => {
   let parsedSessionCookies = setCookie.parse(sessionCookies)
 
-  const _fetch = (url: string) => {
+  const _fetch = (url: string, cache?: RequestCache) => {
     return rrayClient().fetch(url, {
+      cache: cache,
       headers: {
         'Cookie': parsedSessionCookies.map((c: setCookie.Cookie) => `${c.name}=${c.value}`).join('; ')
       }
@@ -36,10 +37,10 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
       let location = response.headers.get('Location')
       if(response.status >= 300 && response.status < 400 && location) {
         if(location.startsWith('http')) {
-          return _fetch(location)
+          return _fetch(location, cache)
         }
 
-        return _fetch(`${baseUrl}${response.headers.get('Location')}`)
+        return _fetch(`${baseUrl}${response.headers.get('Location')}`, cache)
       }
       return response
     })
@@ -70,7 +71,7 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
     },
 
     getTableOfContents(year: number, number: number){
-      return _fetch(`${baseUrl}/select/ct/${year}/${number}`)
+      return _fetch(`${baseUrl}/select/ct/${year}/${number}`, 'force-cache')
       .then((response: Response) => response.text())
       .then((content: string) => new DOMParser().parseFromString(content, 'text/html'))
       .then((doc: Document) => {
@@ -99,13 +100,13 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
     },
 
     getArticle(year: number, number: number, page: number): Promise<Article> {
-      return _fetch(`${baseUrl}/select/ct/${year}/${number}/seite-${page}`)
+      return _fetch(`${baseUrl}/select/ct/${year}/${number}/seite-${page}`, 'force-cache')
       .then((response: Response) => response.text())
       .then((content: string) => new DOMParser().parseFromString(content, 'text/html'))
       .then((doc: Document) : Article => {
         let article = doc.querySelector('article.xp__article')
         if(!article) {
-          throw new Error('no article found')
+          throw new Error(`no article found: ${year}/${number} page ${page}`)
         }
 
         return parseArticle(article)
