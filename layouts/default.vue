@@ -179,7 +179,7 @@ export default {
         return item.title
       }
 
-      return items.find(i => this.$route.path.startsWith(i.to)).title
+      return items.findLast(i => this.$route.path.startsWith(i.to)).title
     },
     currentFavIcon(){
       let items = [

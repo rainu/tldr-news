@@ -37,7 +37,13 @@
       "password": "Password",
       "action": "Login"
     },
-    "logout": "Logout"
+    "logout": "Logout",
+    "ct": {
+      "download": "Download",
+      "page": "Page",
+      "section": "Section",
+      "toc": "Table of Content"
+    }
   },
   "home": {
     "title": "Overview"
