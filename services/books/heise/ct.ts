@@ -29,7 +29,7 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
 
   const _fetch = async (url: string, useCache: Boolean = false) : Promise<Response> => {
     if(!cache) {
-      cache = await caches.open('heise/ct')
+      cache = await caches.open('tldr-news-heise-ct')
     }
 
     if(useCache) {
