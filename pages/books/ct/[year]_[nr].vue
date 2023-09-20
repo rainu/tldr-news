@@ -32,6 +32,13 @@
           </v-btn>
         </template>
       </v-tooltip>
+      <v-tooltip :text="$t('heise.ct.toc')">
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props" @click="onOverview">
+            <v-icon>mdi-table-of-contents</v-icon>
+          </v-btn>
+        </template>
+      </v-tooltip>
     </v-row>
   </v-footer>
 </template>
@@ -70,6 +77,11 @@ export default {
     onArticleClick(page) {
       navigateTo({
         path: `/books/ct/${this.year}_${this.number}_${page}`
+      })
+    },
+    onOverview(){
+      navigateTo({
+        path: `/books/ct`
       })
     },
     onDownload(){

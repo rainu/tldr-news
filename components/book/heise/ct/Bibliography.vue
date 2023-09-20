@@ -7,7 +7,7 @@
       <template v-slot:prepend>
         <span class="pr-1">[{{i + 1}}]</span>
       </template>
-      <a :href="item.Link"> {{item.Text}} </a>
+      <a :href="item.Link" target="_blank"> {{item.Text}} </a>
     </v-list-item>
   </v-list>
 </template>
