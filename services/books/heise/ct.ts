@@ -25,24 +25,50 @@ export const loginHeise = async (username: string, password: string) => {
 
 export const createCrawlerHeiseCt = (sessionCookies: string) => {
   let parsedSessionCookies = setCookie.parse(sessionCookies)
+  let cache: Cache
 
-  const _fetch = (url: string, cache?: RequestCache) => {
+  const _fetch = async (url: string, useCache: Boolean = false) : Promise<Response> => {
+    if(!cache) {
+      cache = await caches.open('heise/ct')
+    }
+
+    if(useCache) {
+      let response = await cache.match(url)
+      if(response){
+        console.log("[CACHE] Use cache for " + url)
+
+        const location = response.headers.get('Location')
+        if(location) {
+          if(location.startsWith('http')) {
+            return _fetch(location, useCache)
+          }
+          return _fetch(`${baseUrl}${response.headers.get('Location')}`, useCache)
+        }
+
+        return response
+      }
+    }
+
     return rrayClient().fetch(url, {
-      cache: cache,
       headers: {
         'Cookie': parsedSessionCookies.map((c: setCookie.Cookie) => `${c.name}=${c.value}`).join('; ')
       }
     })
     .then((response: Response) => {
-      let location = response.headers.get('Location')
+      const location = response.headers.get('Location')
       if(response.status >= 300 && response.status < 400 && location) {
-        if(location.startsWith('http')) {
-          return _fetch(location, cache)
+        if (location.startsWith('http')) {
+          return cache.put(url, response).then(() => _fetch(location, useCache))
         }
 
-        return _fetch(`${baseUrl}${response.headers.get('Location')}`, cache)
+        return cache.put(url, response).then(() => _fetch(`${baseUrl}${response.headers.get('Location')}`, useCache))
       }
-      return response
+      if(response.status >= 400) {
+        // do not cache unsuccessful responses
+        return response
+      }
+
+      return cache.put(url, response).then(() => cache.match(url))
     })
   }
 
@@ -71,7 +97,7 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
     },
 
     getTableOfContents(year: number, number: number){
-      return _fetch(`${baseUrl}/select/ct/${year}/${number}`, 'force-cache')
+      return _fetch(`${baseUrl}/select/ct/${year}/${number}`, true)
       .then((response: Response) => response.text())
       .then((content: string) => new DOMParser().parseFromString(content, 'text/html'))
       .then((doc: Document) => {
@@ -100,7 +126,7 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
     },
 
     getArticle(year: number, number: number, page: number): Promise<Article> {
-      return _fetch(`${baseUrl}/select/ct/${year}/${number}/seite-${page}`, 'force-cache')
+      return _fetch(`${baseUrl}/select/ct/${year}/${number}/seite-${page}`, true)
       .then((response: Response) => response.text())
       .then((content: string) => new DOMParser().parseFromString(content, 'text/html'))
       .then((doc: Document) : Article => {
