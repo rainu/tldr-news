@@ -6,6 +6,11 @@
       <v-card-text>
         <v-row dense>
           <v-col cols="12">
+            <v-progress-linear v-model="total.done" :max="total.total" height="25" bg-color="primary" color="secondary">
+              <strong>{{ Math.ceil(total.done * 100 / total.total) }} %</strong>
+            </v-progress-linear>
+          </v-col>
+          <v-col cols="12">
             <v-progress-linear v-model="section.done" :max="toc.length" height="25" bg-color="primary" color="secondary">
               <strong>{{ $t('heise.ct.section') }} {{ section.done }} / {{ toc.length }}</strong>
             </v-progress-linear>
@@ -46,6 +51,10 @@ export default {
     return {
       showProgress: false,
       inProgress: false,
+      total: {
+        done: 0,
+        total: 0
+      },
       section: {
         done: 0,
       },
@@ -64,6 +73,8 @@ export default {
   },
   methods: {
     async onDownload() {
+      this.total.done = 0
+      this.total.total = 0
       this.section.done = 0
       this.inProgress = true
       this.showProgress = true
@@ -73,12 +84,17 @@ export default {
       }
 
       for (let section of this.toc) {
+        this.total.total += section.content.length
+      }
+
+      for (let section of this.toc) {
         this.page.done = 0
         this.page.total = section.content.length
 
         await Promise.all(section.content.map(
           c => this.fetcher.getArticle(this.year, this.number, c.page)
           .then(() => {
+            this.total.done++
             this.page.done++
           })
         ))
