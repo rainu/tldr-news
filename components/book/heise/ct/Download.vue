@@ -40,9 +40,6 @@ export default {
     },
     number: {
       required: true
-    },
-    toc: {
-      required: true
     }
   },
   data(){
@@ -55,7 +52,8 @@ export default {
       page: {
         done: 0,
         total: 0,
-      }
+      },
+      toc: null
     }
   },
   computed: {
@@ -69,6 +67,10 @@ export default {
       this.section.done = 0
       this.inProgress = true
       this.showProgress = true
+
+      if(!this.toc) {
+        this.toc = await this.fetcher.getTableOfContent(this.year, this.number)
+      }
 
       for (let section of this.toc) {
         this.page.done = 0

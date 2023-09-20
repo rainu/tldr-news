@@ -96,7 +96,7 @@ export const createCrawlerHeiseCt = (sessionCookies: string) => {
       })
     },
 
-    getTableOfContents(year: number, number: number){
+    getTableOfContent(year: number, number: number){
       return _fetch(`${baseUrl}/select/ct/${year}/${number}`, true)
       .then((response: Response) => response.text())
       .then((content: string) => new DOMParser().parseFromString(content, 'text/html'))
