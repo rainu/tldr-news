@@ -1,5 +1,41 @@
 <template>
-  <Article v-if="article" :article="article"></Article>
+  <v-container v-if="article" fluid>
+    <span id="topOfPage" />
+    <div v-for="(content, i) of article.Content">
+      <template v-if="content.t === 'section'">
+        <v-row v-if="content.Title" :id="`section-${i}`">
+          <v-col>
+            <h3>{{content.Title}}</h3>
+          </v-col>
+        </v-row>
+        <v-row v-for="sectionContent of content.Content">
+          <v-col>
+            <Paragraph v-if="sectionContent.t === 'paragraph'" :value="sectionContent" />
+            <template v-else-if="sectionContent.t === 'figure'">
+              <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="10">
+                  <Figure :value="sectionContent" />
+                </v-col>
+                <v-col cols="1"></v-col>
+              </v-row>
+            </template>
+          </v-col>
+        </v-row>
+      </template>
+      <v-row v-else>
+        <v-col>
+          <Header v-if="content.t === 'header'" :value="content" />
+          <Vita v-else-if="content.t === 'vita'" :value="content" />
+          <Asset v-else-if="content.t === 'asset'" :value="content" />
+          <Bibliography v-else-if="content.t === 'bibliography'" :value="content" />
+          <Table v-else-if="content.t === 'table'" :value="content" />
+          <ShortUrl v-else-if="content.t === 'shorturl'" :value="content" />
+        </v-col>
+      </v-row>
+
+    </div>
+  </v-container>
   <v-progress-linear v-else indeterminate color="primary"></v-progress-linear>
 
   <v-footer app>
@@ -12,13 +48,37 @@
       </a>
       <v-spacer></v-spacer>
 
-      <v-tooltip :text="$t('heise.ct.toc')">
-        <template v-slot:activator="{ props }">
-          <v-btn icon v-bind="props" @click="onToc">
-            <v-icon>mdi-table-of-contents</v-icon>
+      <v-menu open-on-click>
+        <template v-slot:activator="{props}">
+          <v-btn icon v-bind="props">
+            <v-icon>mdi-menu</v-icon>
           </v-btn>
         </template>
-      </v-tooltip>
+        <v-list>
+          <v-list-item @click="scrollToTop()">
+            <v-list-item-title>{{ $t('heise.ct.top') }}</v-list-item-title>
+            <template v-slot:append>
+              <v-icon>mdi-navigation-variant</v-icon>
+            </template>
+          </v-list-item>
+          <template v-for="(content, i) of article.Content">
+            <v-list-item v-if="content.t === 'section' && !!content.Title" @click="scrollTo(i)">
+              <v-list-item-title>{{content.Title}}</v-list-item-title>
+              <template v-slot:append>
+                <v-icon>mdi-navigation-variant</v-icon>
+              </template>
+            </v-list-item>
+          </template>
+        </v-list>
+        <v-list>
+          <v-list-item @click="onToc">
+            <v-list-item-title>{{ $t('heise.ct.toc') }}</v-list-item-title>
+            <template v-slot:append>
+              <v-icon>mdi-table-of-contents</v-icon>
+            </template>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-row>
   </v-footer>
 </template>
@@ -27,11 +87,28 @@
 import {mapState} from "pinia";
 import {useSessionsStore} from "~/store/sessions";
 import {createCrawlerHeiseCt} from "~/services/books/heise/ct";
-import Article from "~/components/book/heise/ct/Article.vue";
 import Download from "~/components/book/heise/ct/Download.vue";
+import Figure from "~/components/book/heise/ct/Figure.vue";
+import Bibliography from "~/components/book/heise/ct/Bibliography.vue";
+import Paragraph from "~/components/book/heise/ct/Paragraph.vue";
+import Header from "~/components/book/heise/ct/Header.vue";
+import Table from "~/components/book/heise/ct/Table.vue";
+import Asset from "~/components/book/heise/ct/Asset.vue";
+import ShortUrl from "~/components/book/heise/ct/ShortUrl.vue";
+import Vita from "~/components/book/heise/ct/Vita.vue";
 
 export default {
-  components: {Download, Article},
+  components: {
+    Vita,
+    ShortUrl,
+    Asset,
+    Table,
+    Header,
+    Paragraph,
+    Bibliography,
+    Figure,
+    Download,
+  },
   data(){
     return {
       article: null
@@ -62,6 +139,20 @@ export default {
     onToc(){
       navigateTo({
         path: `/books/ct/${this.year}_${this.number}`
+      })
+    },
+    scrollToTop() {
+      document.getElementById(`topOfPage`).scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "start"
+      })
+    },
+    scrollTo(i) {
+      document.getElementById(`section-${i}`).scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
       })
     }
   },

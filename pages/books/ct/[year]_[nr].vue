@@ -47,11 +47,10 @@
 import {createCrawlerHeiseCt} from "~/services/books/heise/ct";
 import {mapState} from "pinia";
 import {useSessionsStore} from "~/store/sessions";
-import Article from "~/components/book/heise/ct/Article.vue";
 import Download from "~/components/book/heise/ct/Download.vue";
 
 export default {
-  components: {Download, Article},
+  components: {Download},
   data(){
     return {
       loading: true,
