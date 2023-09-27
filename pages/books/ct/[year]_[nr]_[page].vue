@@ -40,6 +40,8 @@
 
   <v-footer app>
     <v-row no-gutters align="center">
+      <v-progress-linear indeterminate v-show="summarizeInProgress" color="primary"></v-progress-linear>
+
       <a target="_blank" :href="articleLink">
         {{year}}/{{number}}
         -
@@ -70,7 +72,14 @@
             </v-list-item>
           </template>
         </v-list>
+
         <v-list>
+          <v-list-item @click="onSummarize">
+            <v-list-item-title>{{ $t('heise.ct.summarize') }}</v-list-item-title>
+            <template v-slot:append>
+              <v-icon>mdi-text-short</v-icon>
+            </template>
+          </v-list-item>
           <v-list-item @click="onToc">
             <v-list-item-title>{{ $t('heise.ct.toc') }}</v-list-item-title>
             <template v-slot:append>
@@ -96,6 +105,7 @@ import Table from "~/components/book/heise/ct/Table.vue";
 import Asset from "~/components/book/heise/ct/Asset.vue";
 import ShortUrl from "~/components/book/heise/ct/ShortUrl.vue";
 import Vita from "~/components/book/heise/ct/Vita.vue";
+import {openaiClient} from "~/services/openai";
 
 export default {
   components: {
@@ -111,7 +121,8 @@ export default {
   },
   data(){
     return {
-      article: null
+      article: null,
+      summarizeInProgress: false
     }
   },
   computed: {
@@ -153,6 +164,24 @@ export default {
         behavior: "smooth",
         block: "center",
         inline: "center"
+      })
+    },
+    onSummarize(){
+      this.summarizeInProgress = true
+
+      let summarizableParagraphs = this.article.Content
+        .filter(e => e.t === 'section')
+        .map(s => s.Content)
+        .flat()
+        .filter(c => c.t === 'paragraph')
+        .filter(p => !p.Summary) //only ones which have no summary yet
+
+      //summarize all paragraphs
+      Promise.all(summarizableParagraphs.map(p => openaiClient().mainStatementOf(p.Content).then(summary => {
+        // extend the object itself with the summary
+        p.Summary = summary
+      }))).finally(() => {
+        this.summarizeInProgress = false
       })
     }
   },

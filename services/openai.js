@@ -15,12 +15,12 @@ export const openaiClient = () => {
     },
     summary(text) {
       return openai.createChatCompletion({
-        model: settings.openai.model,
-        temperature: settings.openai.temperature,
+        model: settings.openai.news.model,
+        temperature: settings.openai.news.temperature,
         messages: [
           {
             role: ChatCompletionRequestMessageRoleEnum.System,
-            content: settings.openai.prompt,
+            content: settings.openai.news.prompt,
           },
           {
             role: ChatCompletionRequestMessageRoleEnum.User,
@@ -29,6 +29,27 @@ export const openaiClient = () => {
         ]
       })
       .then(chatCompletion => chatCompletion.data.choices[0].message.content)
-    }
+    },
+    mainStatementOf(text) {
+      return openai.createChatCompletion({
+        model: settings.openai.books.ct.model,
+        temperature: settings.openai.books.ct.temperature,
+        max_tokens: settings.openai.books.ct.maxTokens,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        messages: [
+          {
+            role: ChatCompletionRequestMessageRoleEnum.System,
+            content: settings.openai.books.ct.prompt,
+          },
+          {
+            role: ChatCompletionRequestMessageRoleEnum.User,
+            content: text,
+          }
+        ]
+      })
+      .then(result => result.data.choices[0].message.content)
+    },
   }
 }

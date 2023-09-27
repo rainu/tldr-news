@@ -1,5 +1,5 @@
 <template>
-  <v-card color="grey">
+  <v-card color="grey-lighten-3">
     <v-card-title>{{value.Title}}</v-card-title>
     <v-card-subtitle>{{value.Subtitle}}</v-card-subtitle>
     <v-card-text>
@@ -15,7 +15,7 @@
               <v-col cols="1"></v-col>
             </v-row>
           </template>
-          <Rating v-else-if="content.t === 'rating'" :value="content" color="grey"></Rating>
+          <Rating v-else-if="content.t === 'rating'" :value="content" color="grey-lighten-3"></Rating>
           <v-list v-else-if="content.t === 'listing'">
             <v-list-item v-for="(item, i) of content.Items" :key="i" density="compact">
               <template v-slot:prepend>
