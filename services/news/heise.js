@@ -25,14 +25,11 @@ export const createCrawlerHeise = (requestFn = proxyFetch) => {
       .then(response => response.text())
       .then(content => new DOMParser().parseFromString(content, 'text/html'))
       .then(doc => {
-        let imgSrc = 'https://www.heise.de' + doc.querySelector('a-img').getAttribute('src')
+        let img = doc.querySelector('a-img')
         let legacyImg = doc.querySelector('img.legacy-img')
-        if(legacyImg) {
-          imgSrc = legacyImg.getAttribute('src')
-        }
         return {
           content: Array.from(doc.getElementsByTagName('article')[0].querySelectorAll('p:not([class])')).filter(e => !e.hasAttributes()).map(e => e.textContent).join(' ').trim(),
-          teaserImg: imgSrc
+          teaserImg: legacyImg ? legacyImg.getAttribute('src') : 'https://www.heise.de' + img.getAttribute('src')
         }
       })
     }
