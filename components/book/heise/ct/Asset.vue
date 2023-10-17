@@ -6,6 +6,7 @@
       <v-row v-for="content of value.Content">
         <v-col>
           <Paragraph v-if="content.t === 'paragraph'" :value="content"></Paragraph>
+          <Codeblock v-else-if="content.t === 'codeblock'" :value="content"></Codeblock>
           <template v-else-if="content.t === 'figure'">
             <v-row>
               <v-col cols="1"></v-col>
@@ -35,9 +36,10 @@
 import Paragraph from "~/components/book/heise/ct/Paragraph.vue";
 import Figure from "~/components/book/heise/ct/Figure.vue";
 import Rating from "~/components/book/heise/ct/Rating.vue";
+import Codeblock from "~/components/book/heise/ct/Codeblock.vue";
 
 export default {
-  components: {Rating, Figure, Paragraph},
+  components: {Codeblock, Rating, Figure, Paragraph},
   props: {
     value: {
       type: Object,

@@ -62,6 +62,16 @@ const mapParagraph = (element: Element): ArticleParagraph => ({
   Content: element.textContent.trim() || ""
 })
 
+export type ArticleCodeblock = {
+  t: 'codeblock'
+  Content: string
+}
+
+const mapCodeblock = (element: Element): ArticleCodeblock => ({
+  t: "codeblock",
+  Content: element.textContent.trim() || ""
+})
+
 export type ArticleVita = {
   t: "vita"
   Image: string
@@ -107,8 +117,9 @@ const mapAsset = (element: Element): ArticleAsset => ({
   t: 'asset',
   Title: element.querySelector('h4')?.textContent?.trim() || null,
   Subtitle: element.querySelector('h3')?.textContent?.trim() || null,
-  Content: Array.from(element.querySelectorAll('p, figure, div.xp__rating, ul:not(.xp__rating__list, .xp__toc)')).map(e => {
+  Content: Array.from(element.querySelectorAll('p, pre.xp__codeblock, figure, div.xp__rating, ul:not(.xp__rating__list, .xp__toc)')).map(e => {
     if(e.tagName === 'P') return mapParagraph(e)
+    if(e.tagName === 'PRE') return mapCodeblock(e)
     if(e.tagName === 'FIGURE') return mapFigure(e)
     if(e.tagName === 'UL') return mapArticleListing(e)
     return mapRating(e)
@@ -236,8 +247,8 @@ export type ArticleSection = {
   Content: ArticleSectionContentElement[]
 }
 
-type ArticleElement = (ArticleFigure | ArticleVita | ArticleHeader | ArticleSubHeader | ArticleParagraph | ArticleAsset)
-type ArticleSectionContentElement = (ArticleFigure | ArticleParagraph)
+type ArticleElement = (ArticleFigure | ArticleVita | ArticleHeader | ArticleSubHeader | ArticleParagraph | ArticleCodeblock | ArticleAsset)
+type ArticleSectionContentElement = (ArticleFigure | ArticleParagraph | ArticleCodeblock)
 type ArticleContent = ArticleContentElement[]
 type ArticleContentElement = (ArticleHeader | ArticleSection | ArticleVita | ArticleAsset | ArticleBibliography | ArticleShortUrl)
 
@@ -252,6 +263,7 @@ export const parseArticle = (article: Element): Article => {
       if(e.tagName === 'HEADER') return mapHeader(e)
       if(e.tagName === 'P' && e.classList.contains('xp__paragraph')) return mapParagraph(e)
       if(e.tagName === 'P' && e.classList.contains('xp__shorturl')) return mapShortUrl(e)
+      if(e.tagName === 'PRE' && e.classList.contains('xp__codeblock')) return mapCodeblock(e)
       if(e.tagName === 'DIV' && e.classList.contains('xp__vita')) return mapVita(e)
       if(e.tagName === 'DIV' && e.getAttribute('class')?.includes('xp__table')) return mapTable(e.querySelector('table') || e)
       if(e.tagName === 'FIGURE') return mapFigure(e)
@@ -284,6 +296,7 @@ export const parseArticle = (article: Element): Article => {
         break
       }
       case "figure":
+      case "codeblock":
       case "paragraph": {
         currentSection.Content.push(curPart)
         break

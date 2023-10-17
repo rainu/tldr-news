@@ -11,6 +11,7 @@
         <v-row v-for="sectionContent of content.Content">
           <v-col>
             <Paragraph v-if="sectionContent.t === 'paragraph'" :value="sectionContent" />
+            <Codeblock v-else-if="sectionContent.t === 'codeblock'" :value="sectionContent" />
             <template v-else-if="sectionContent.t === 'figure'">
               <v-row>
                 <v-col cols="1"></v-col>
@@ -105,10 +106,12 @@ import Table from "~/components/book/heise/ct/Table.vue";
 import Asset from "~/components/book/heise/ct/Asset.vue";
 import ShortUrl from "~/components/book/heise/ct/ShortUrl.vue";
 import Vita from "~/components/book/heise/ct/Vita.vue";
+import Codeblock from "~/components/book/heise/ct/Codeblock.vue";
 import {openaiClient} from "~/services/openai";
 
 export default {
   components: {
+    Codeblock,
     Vita,
     ShortUrl,
     Asset,
@@ -188,6 +191,7 @@ export default {
   mounted() {
     this.fetcher.getArticle(this.year, this.number, this.page)
       .then(content => {
+        console.log(content)
         this.article = content
       })
   }
