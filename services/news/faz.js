@@ -12,7 +12,7 @@ export const createCrawlerFaz = (requestFn = proxyFetch) => {
           .filter(e => !e.querySelector('img[alt="Agenturmeldung"]'))
           .map(e => ({
             title: e.querySelector('.ticker-news-super').innerText.replace(':', '').trim() + ": " + e.querySelector('.ticker-news-title').innerText.trim(),
-            url: e.querySelector('.ticker-news-title a').getAttribute('href'),
+            url: 'https://www.faz.net' + e.querySelector('.ticker-news-title a').getAttribute('href'),
             date: parse(e.getElementsByTagName('time')[0].innerText.replace(' Uhr', ''), 'dd.MM.yyyy HH:mm', new Date())
           }))
 
@@ -63,10 +63,14 @@ export const createCrawlerFaz = (requestFn = proxyFetch) => {
         .then(response => response.text())
         .then(content => new DOMParser().parseFromString(content, 'text/html'))
         .then(doc => {
-          return {
+          const result = {
             content: Array.from(doc.querySelectorAll('.atc-TextParagraph')).map(e => e.textContent).join(' ').trim(),
-            teaserImg: doc.querySelector('.atc-ImageContainer img.atc-Image').getAttribute('data-retina-src')
+            teaserImg: doc.querySelector('.atc-ImageContainer img.atc-Image')?.getAttribute('data-retina-src')
           }
+
+          if(!result.content) throw new Error('no content readable from article')
+
+          return result
         })
     }
   }

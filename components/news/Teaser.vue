@@ -54,6 +54,11 @@
         </div>
       </div>
     </v-card-text>
+    <v-card-text v-else-if="contentError">
+      <v-alert type="error" density="compact">
+        {{contentError}}
+      </v-alert>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -87,6 +92,7 @@ export default {
   data(){
     return {
       content: null,
+      contentError: null,
       show: false,
       summary: null,
     }
@@ -128,6 +134,9 @@ export default {
               conclusion: summary
             }
           }
+        })
+        .catch(err => {
+          this.contentError = err
         })
     },
   }
