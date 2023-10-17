@@ -33,10 +33,16 @@ const baseCrawlerZeit = (requestFn = proxyFetch, teaserFilter) => {
       })
       .then(response => response.text())
       .then(content => new DOMParser().parseFromString(content, 'text/html'))
-      .then(doc => ({
-        content: Array.from(doc.querySelectorAll('.article-body .paragraph.article__item')).map(e => e.textContent).join(' ').trim(),
-        teaserImg: doc.querySelector('div[data-ct-row="headerimage"] picture img').getAttribute('src')
-      }))
+      .then(doc => {
+        const result = {
+          content: Array.from(doc.querySelectorAll('.article-body .paragraph.article__item')).map(e => e.textContent).join(' ').trim(),
+          teaserImg: doc.querySelector('div[data-ct-row="headerimage"] picture img')?.getAttribute('src')
+        }
+
+        if(!result.content) throw new Error('no content readable from article')
+
+        return result
+      })
     }
   }
 }
