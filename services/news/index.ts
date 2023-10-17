@@ -4,7 +4,7 @@ import {createCrawlerHeise} from "~/services/news/heise";
 import {createCrawlerGolem} from "~/services/news/golem";
 import {createCrawlerFaz} from "~/services/news/faz";
 import {createCrawlerFazDpa} from "~/services/news/faz-dpa";
-import {createCrawlerZeitDpa} from "~/services/news/zeit";
+import {createCrawlerZeit, createCrawlerZeitDpa} from "~/services/news/zeit";
 import {createCrawlerRadioBonn} from "~/services/news/radiobonn";
 
 export type Teaser = {
@@ -56,7 +56,7 @@ const sources: { [id: string]: Source } = {
   },
   zeit: {
     favIcon: () => 'https://static.zeit.de/p/zeit.web/icons/favicon.svg',
-    crawler: createCrawlerZeitDpa
+    crawler: createCrawlerZeit
   },
   'zeit-dpa': {
     favIcon: () => 'https://dpa.com/icon-512x512.png',

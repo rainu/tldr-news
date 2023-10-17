@@ -13,7 +13,7 @@ const baseCrawlerZeit = (requestFn = proxyFetch, teaserFilter) => {
       .then(content => new DOMParser().parseFromString(content, 'text/html'))
       .then(doc => {
         let result = Array.from(doc.querySelectorAll('article.zon-teaser-news'))
-        .filter(e => !e.hasAttribute('data-zplus'))
+        .filter(e => e.getAttribute('data-zplus') !== 'zplus')
         .filter(e => teaserFilter(e))
         .map(e => ({
           title: e.getElementsByTagName('a')[0].getAttribute('title'),
