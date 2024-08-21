@@ -21,20 +21,20 @@ export const useSettingsStore = defineStore('settings', {
     openai: {
       token: '',
       news: {
-        prompt: `I want you to only reply in JSON form! The content of this JSON is the following: 
+        prompt: `I want you to only reply in JSON form! Do not use Markdown! The content of this JSON is the following: 
   * "points": the most important statements which reflects the summary of the article 
   * "topics": at most two biggest topics as single word in the whole article
   * "conclusion": a short conclusion of the whole article
 Do answer only in german!`,
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini',
         temperature: 0.5,
       },
       books: {
         ct: {
           prompt: `Extract the main statement from the given passage. Make it short! Do response in german!`,
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4o-mini',
           temperature: 0.5,
-          maxTokens: 256
+          maxTokens: 512
         }
 
       }
